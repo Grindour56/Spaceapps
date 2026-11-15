@@ -45,11 +45,6 @@ data/
 outputs/
 warehouse/
 
-*.duckdb
-*.duckdb.wal
-*.db
-*.parquet
-*.csv.gz
 
 # Large generated intermediate files
 DUPLICATE_RECORDS.csv
@@ -76,6 +71,7 @@ Thumbs.db
 # ==============================
 # Logs and temporary files
 # ==============================
+*.txt
 *.log
 *.tmp
 *.bak
