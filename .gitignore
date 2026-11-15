@@ -1,0 +1,82 @@
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ==============================
+# Secrets and credentials
+# ==============================
+.env
+.env.*
+!.env.example
+map_key
+*secret*
+*credentials*
+
+# ==============================
+# Raw satellite datasets
+# ==============================
+fire_archive_*.csv
+fire_nrt_*.csv
+MODIS_*.zip
+VIIRS_*.zip
+modis_*_all_countries.zip
+modis/
+
+# ==============================
+# Generated data
+# ==============================
+data/
+outputs/
+warehouse/
+
+*.duckdb
+*.duckdb.wal
+*.db
+*.parquet
+*.csv.gz
+
+# Large generated intermediate files
+DUPLICATE_RECORDS.csv
+
+# ==============================
+# Frontend
+# ==============================
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+
+# ==============================
+# IDE and OS
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Logs and temporary files
+# ==============================
+*.log
+*.tmp
+*.bak
+*.orig
+
