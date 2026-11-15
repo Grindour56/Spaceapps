@@ -1,0 +1,83 @@
+{
+  "report_version": "firescope-data-quality-1.0",
+  "processing_version": "firescope-pipeline-1.1",
+  "warehouse": "/workspace/Projects/spaceapp/warehouse/firescope.duckdb",
+  "canonical_observations": 400000,
+  "manifest_input_rows_read": 400000,
+  "manifest_valid_rows": 400000,
+  "manifest_invalid_rows": 0,
+  "invalid_row_reasons": {},
+  "sensor_quality": [
+    {
+      "sensor": "MODIS",
+      "records": 160000,
+      "missing_datetime": 0,
+      "missing_frp": 0,
+      "missing_confidence": 0,
+      "unknown_daynight": 0,
+      "missing_modis_brightness": 0,
+      "missing_bright_t31": 0,
+      "missing_bright_ti4": 0,
+      "missing_bright_ti5": 0
+    },
+    {
+      "sensor": "VIIRS",
+      "records": 240000,
+      "missing_datetime": 0,
+      "missing_frp": 0,
+      "missing_confidence": 0,
+      "unknown_daynight": 0,
+      "missing_modis_brightness": 0,
+      "missing_bright_t31": 0,
+      "missing_bright_ti4": 240000,
+      "missing_bright_ti5": 240000
+    }
+  ],
+  "satellite_records": {
+    "NOAA-20": 100000,
+    "NOAA-21": 40000,
+    "Terra": 56826,
+    "Aqua": 103174,
+    "Suomi-NPP": 100000
+  },
+  "product_versions": {
+    "2": 240000,
+    "61.03": 60000,
+    "6.03": 100000
+  },
+  "date_min": "2018-11-11",
+  "date_max": "2025-12-04",
+  "distinct_detection_dates": 22,
+  "geographic_bounds": {
+    "latitude_min": -52.60641,
+    "latitude_max": 71.92394,
+    "longitude_min": -176.6144,
+    "longitude_max": 179.60487
+  },
+  "duplicates": {
+    "exact_duplicates_removed": 0,
+    "within_file_duplicates": 0,
+    "cross_source_duplicates": 0
+  },
+  "potential_overlap_groups": 0,
+  "country_assignments": 400000,
+  "manifest_status": {
+    "sampled": 20
+  },
+  "input_coverage_complete": false,
+  "coverage_semantics": "Detection-observed only; no confirmed zero-detection periods are generated.",
+  "h3_resolution": 6,
+  "processing_parameters": {
+    "timestamp": "FIRMS acquisition date + HHMM interpreted as UTC; original values retained",
+    "coordinates": "latitude [-90,90], longitude [-180,180]; invalid rows retained in invalid_observations",
+    "confidence": "native field retained; UI bands are a display convention, not calibrated cross-sensor confidence",
+    "brightness": "MODIS brightness/bright_t31 and VIIRS bright_ti4/bright_ti5 remain separate",
+    "duplicate_identity": "SHA-256 over normalized event fields; source path/product label excluded; product version and sensor retained",
+    "provenance": "one canonical row per exact fingerprint; all source associations retained"
+  },
+  "software_versions": {
+    "duckdb": "2.0.0",
+    "h3": "4.5.0",
+    "shapely": "2.2.0"
+  }
+}

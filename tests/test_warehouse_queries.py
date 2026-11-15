@@ -85,4 +85,35 @@ class WarehouseQueryTests(unittest.TestCase):
                 p=self.root/'data'/'processed'/'aggregates'/f'{table}.parquet'
                 self.assertTrue(p.is_file(),table)
 
+    def test_vercel_wsgi_and_handler_entrypoints_serve_routes_and_block_secrets(self):
+        import io, json, tomllib
+        from http.server import BaseHTTPRequestHandler
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'app'))
+        import server as srv
+        self.assertTrue(hasattr(srv,'app'))
+        self.assertTrue(callable(srv.app))
+        self.assertTrue(hasattr(srv,'handler'))
+        self.assertTrue(issubclass(srv.handler,BaseHTTPRequestHandler))
+        pyproject=Path(__file__).resolve().parents[1]/'pyproject.toml'
+        self.assertTrue(pyproject.is_file())
+        cfg=tomllib.loads(pyproject.read_text())
+        self.assertEqual(cfg.get('tool',{}).get('vercel',{}).get('entrypoint'),'app/server.py')
+
+        def call_wsgi(method,path,body=b''):
+            status_box=[];headers_box=[]
+            def start_response(status,headers,exc_info=None):
+                status_box.append(status);headers_box.extend(headers)
+            env={'REQUEST_METHOD':method,'PATH_INFO':path,'CONTENT_LENGTH':str(len(body)),'wsgi.input':io.BytesIO(body)}
+            chunks=b''.join(srv.app(env,start_response))
+            return status_box[0],dict(headers_box),chunks
+
+        st,_,body=call_wsgi('GET','/api/health')
+        self.assertTrue(st.startswith('200'))
+        self.assertTrue(json.loads(body)['ok'])
+        st,_,body=call_wsgi('POST','/api/analytics',json.dumps({'sensor':'MODIS'}).encode())
+        self.assertTrue(st.startswith('200'))
+        self.assertIn('total',json.loads(body))
+        st,_,_=call_wsgi('GET','/map_key')
+        self.assertTrue(st.startswith('404'))
+
 if __name__=='__main__':unittest.main()

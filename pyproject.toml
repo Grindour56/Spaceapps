@@ -1,0 +1,13 @@
+[project]
+name = "firescope"
+version = "0.1.0"
+description = "FireScope active-fire exploration and MODIS/VIIRS harmonization platform"
+requires-python = ">=3.11"
+dependencies = [
+    "shapely==2.2.0",
+    "duckdb==2.0.0",
+    "h3==4.5.0",
+]
+
+[tool.vercel]
+entrypoint = "app/server.py"
