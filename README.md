@@ -1,5 +1,6 @@
 # FireScope — global active-fire exploration MVP
-https://spaceapps-zeta.vercel.app
+Project URL: https://spaceapps-zeta.vercel.app
+
 FireScope extends the existing FIRMS data workflow with a local Leaflet map, Natural Earth country selection, polygon/rectangle/circle AOIs, synchronized date and sensor filters, an interactive daily calendar, regional summaries, annual/monthly trend views, and filtered daily CSV export.
 
 ## Setup and run
